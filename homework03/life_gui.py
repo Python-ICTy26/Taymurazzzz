@@ -22,7 +22,7 @@ class GUI(UI):
         # Copy from previous assignment
         for i in range(self.life.rows):
             for j in range(self.life.cols):
-                if self.grid[i][j] == 0:
+                if self.life.curr_generation[i][j] == 0:
                     pygame.draw.rect(
                         self.screen,
                         pygame.Color("white"),
@@ -39,17 +39,51 @@ class GUI(UI):
         """Запустить игру"""
         pygame.init()
         clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode((self.life.cols, self.life.rows))
         pygame.display.set_caption("Game of Life")
         self.screen.fill(pygame.Color("white"))
-        self.grid = self.life.create_grid(randomize=True)
+
+        self.draw_grid()
+        self.draw_lines()
+
         running = True
+        pause = False
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.constants.QUIT:
                     running = False
-            self.draw_grid()
-            self.draw_lines()
-            self.life.step()
-            pygame.display.flip()
-            clock.tick(self.speed)
+                if event.type == pygame.MOUSEBUTTONUP:
+                    if not pause:
+                        continue
+
+                    y, x = pygame.mouse.get_pos()
+                    x //= self.cell_size
+                    y //= self.cell_size
+
+                    if self.life.curr_generation[x][y]:
+                        self.life.curr_generation[x][y] = 0
+                    else:
+                        self.life.curr_generation[x][y] = 1
+                    self.draw_grid()
+                    self.draw_lines()
+
+                    pygame.display.flip()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        pause = not pause
+
+            if not pause:
+                if not self.life.is_max_generations_exceeded and self.life.is_changing:
+                    self.life.step()
+                    self.draw_grid()
+                    self.draw_lines()
+
+                pygame.display.flip()
+                clock.tick(self.speed)
         pygame.quit()
+
+
+proto = GameOfLife(size=(800, 800), randomize=False)
+game = GUI(cell_size=400, life=proto)
+game.run()
