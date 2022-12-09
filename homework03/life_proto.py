@@ -36,31 +36,31 @@ class GameOfLife:
         for y in range(0, self.height, self.cell_size):
             pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
 
-    def run(self) -> None:
-        """Запустить игру"""
-        pygame.init()
-        clock = pygame.time.Clock()
-        pygame.display.set_caption("Game of Life")
-        self.screen.fill(pygame.Color("white"))
-
-        # Создание списка клеток
-        self.grid = self.create_grid(randomize=True)
-
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
-            self.draw_grid()
-            self.draw_lines()
-
-            # Отрисовка списка клеток
-            # Выполнение одного шага игры (обновление состояния ячеек)
-            self.grid = self.get_next_generation()
-
-            pygame.display.flip()
-            clock.tick(self.speed)
-        pygame.quit()
+    # def run(self) -> None:
+    #     """Запустить игру"""
+    #     pygame.init()
+    #     clock = pygame.time.Clock()
+    #     pygame.display.set_caption("Game of Life")
+    #     self.screen.fill(pygame.Color("white"))
+    #
+    #     # Создание списка клеток
+    #     self.grid = self.create_grid(randomize=True)
+    #
+    #     running = True
+    #     while running:
+    #         for event in pygame.event.get():
+    #             if event.type == QUIT:
+    #                 running = False
+    #         self.draw_grid()
+    #         self.draw_lines()
+    #
+    #         # Отрисовка списка клеток
+    #         # Выполнение одного шага игры (обновление состояния ячеек)
+    #         self.grid = self.get_next_generation()
+    #
+    #         pygame.display.flip()
+    #         clock.tick(self.speed)
+    #     pygame.quit()
 
     def create_grid(self, randomize: bool = False) -> Grid:
         """
@@ -187,7 +187,3 @@ class GameOfLife:
                         h[i][j] = 0
 
         return h
-
-
-game = GameOfLife(cell_size=40)
-game.run()
