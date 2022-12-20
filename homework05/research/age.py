@@ -1,4 +1,5 @@
 import typing as tp
+
 from vkapi.friends import get_friends
 
 

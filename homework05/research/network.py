@@ -1,5 +1,6 @@
 import typing as tp
 from collections import defaultdict
+
 import community as community_louvain
 import matplotlib.pyplot as plt
 import networkx as nx
