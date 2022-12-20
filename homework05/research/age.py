@@ -1,7 +1,4 @@
-import datetime as dt
-import statistics
 import typing as tp
-from vkapi.config import VK_CONFIG
 from vkapi.friends import get_friends
 
 
@@ -33,4 +30,4 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     return age
 
 
-print(age_predict(195797232))
+# print(age_predict(195797232))
