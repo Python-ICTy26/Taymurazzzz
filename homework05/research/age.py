@@ -19,7 +19,7 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     f = get_friends(user_id)
     for i in range(0, len(f)):
         try:
-            friend_ages.append(f[i]['bdate'].split('.')[2])
+            friend_ages.append(f[i]["bdate"].split(".")[2])
         except KeyError:
             continue
         except IndexError:
@@ -31,4 +31,6 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     except ZeroDivisionError:
         return None
     return age
+
+
 print(age_predict(195797232))
