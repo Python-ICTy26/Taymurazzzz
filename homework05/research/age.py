@@ -14,7 +14,7 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     """
     age = 0
     friend_ages = []
-    f = get_friends(user_id)
+    f = get_friends(user_id).items
     for i in range(0, len(f)):
         try:
             friend_ages.append(f[i]["bdate"].split(".")[2])
