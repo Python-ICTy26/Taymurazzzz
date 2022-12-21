@@ -1,5 +1,6 @@
 import time
 import typing as tp
+
 import pandas as pd  # type: ignore
 import requests  # type: ignore
 from pandas import json_normalize

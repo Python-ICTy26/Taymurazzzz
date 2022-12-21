@@ -1,6 +1,7 @@
 import dataclasses
 import time
 import typing as tp
+
 import requests
 from vkapi import config
 
